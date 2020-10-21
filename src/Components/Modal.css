@@ -1,0 +1,61 @@
+.Modal {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    margin: 0 auto;
+    height: 90vh;
+    left: 50%;
+    top: 50%;
+    transition: all 0.3s ease-out;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.close {
+    position: absolute;
+    top: 1vh;
+    right: 1vw;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .left {
+    position: absolute;
+    top: 40vh;
+    left: 5px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .right {
+    position: absolute;
+    top: 40vh;
+    right: 10px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  
+  .close:hover,.close:focus, 
+  .right:hover,.right:focus,
+  .left:hover,.left:focus {
+    color: rgb(3, 3, 3);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .modal-content {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    translate:(-50%, -50%);
+    transition: all 0.3s ease-out;
+  }
+  @keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+  }
