@@ -10,6 +10,7 @@ function App() {
   let [url, setUrl] = useState()
   let [pageNumber, setPageNumber] = useState(1)
   let [photos, setPhotos] = useState([])
+  let [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getSetPhotos()
@@ -18,8 +19,7 @@ function App() {
     // eslint-disable-next-line
   }, [pageNumber])
 
-
-
+  
 
   const handleScroll = () => {
     if (window.scrollY + window.innerHeight > document.body.offsetHeight) {
@@ -32,8 +32,10 @@ function App() {
   }
 
   const getSetPhotos = () => {
+    setIsLoading(true)
     axios.get(`https://api.unsplash.com/photos?page=${pageNumber}&per_page=10&client_id=ktp-gAVLAe3zzt-4aPEvFAElC52Y0_ndtifiYKvo3-M`)
       .then(res => {
+        setIsLoading(false)
         let rawPhotos = res.data.map(photo => photo.urls.regular)
         setPhotos(prevPhotos => { return [...new Set([...prevPhotos, ...rawPhotos])] })
       })
@@ -50,7 +52,6 @@ function App() {
   }
 
   const onClose = (e) => {
-    e.preventDefault()
     setOpen(false)
   }
 
@@ -63,9 +64,27 @@ function App() {
     findIndex(url) > 0 && setUrl(photos[findIndex(url) - 1])
   }
 
+  const handleOnKeyDown = e =>{
+    if(e.key==='Escape'){
+      onClose()
+      e.preventDefault()
+    }
+    else if(e.key==='ArrowLeft'){
+      clickPrevious()
+      e.preventDefault()
+    }
+    else if (e.key==='ArrowRight'){
+      clickNext()
+      e.preventDefault()
+    }
+  }
+
   return (<>
 
-    <div className="feed">
+    <div className="feed"
+      onKeyDown={(e)=>handleOnKeyDown(e)}
+      tabIndex={0}
+      >
       <div className="img">
         {photos.map(photo => (
           <img
@@ -81,9 +100,9 @@ function App() {
       close={(e) => onClose(e)}
       next={() => clickNext()}
       previous={() => clickPrevious()}
-
     />
     <Backdrop show={isOpen} backdropClicked={(e) => onClose(e)} />
+    {isLoading && <div>Loading...</div>}
   </>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import './Modal.css'
 
 const modal = props => {
+    
     return (
         <div className="Modal" style={{
             transform: props.show ? 'translate(-50%, -50%)' : 'translateY(-100vh)',
