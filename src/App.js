@@ -19,7 +19,7 @@ function App() {
     // eslint-disable-next-line
   }, [pageNumber])
 
-  
+
 
   const handleScroll = () => {
     if (window.scrollY + window.innerHeight > document.body.offsetHeight) {
@@ -64,16 +64,16 @@ function App() {
     findIndex(url) > 0 && setUrl(photos[findIndex(url) - 1])
   }
 
-  const handleOnKeyDown = e =>{
-    if(e.key==='Escape'){
+  const handleOnKeyDown = e => {
+    if (e.key === 'Escape') {
       onClose()
       e.preventDefault()
     }
-    else if(e.key==='ArrowLeft'){
+    else if (e.key === 'ArrowLeft') {
       clickPrevious()
       e.preventDefault()
     }
-    else if (e.key==='ArrowRight'){
+    else if (e.key === 'ArrowRight') {
       clickNext()
       e.preventDefault()
     }
@@ -82,9 +82,9 @@ function App() {
   return (<>
 
     <div className="feed"
-      onKeyDown={(e)=>handleOnKeyDown(e)}
+      onKeyDown={(e) => handleOnKeyDown(e)}
       tabIndex={0}
-      >
+    >
       <div className="img">
         {photos.map(photo => (
           <img
